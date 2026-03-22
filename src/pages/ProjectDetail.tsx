@@ -33,9 +33,9 @@ const ProjectDetail = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="pt-16">
+      <main className="pt-14 md:pt-16 pb-tab-bar md:pb-0">
         {/* Hero image */}
-        <div className="relative h-[60vh] md:h-[70vh]">
+        <div className="relative h-[50vh] md:h-[70vh]">
           <img src={project.cover_image} alt={project.title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">

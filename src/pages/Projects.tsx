@@ -29,8 +29,8 @@ const Projects = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="pt-16">
-        <div className="max-w-7xl mx-auto px-6 py-16">
+      <main className="pt-14 md:pt-16 pb-tab-bar md:pb-0">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-16">
           <ScrollReveal>
             <h1 className="font-serif text-4xl md:text-5xl tracking-tight mb-4">Projects</h1>
             <p className="text-muted-foreground max-w-lg mb-12">
