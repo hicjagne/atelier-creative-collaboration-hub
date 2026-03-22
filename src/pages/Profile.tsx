@@ -16,8 +16,8 @@ const Profile = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="pt-16">
-        <div className="max-w-7xl mx-auto px-6 py-16">
+      <main className="pt-14 md:pt-16 pb-tab-bar md:pb-0">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-16">
           {/* Header */}
           <ScrollReveal>
             <div className="flex flex-col md:flex-row gap-8 items-start">
