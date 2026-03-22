@@ -86,4 +86,17 @@
   .font-sans {
     font-family: var(--font-sans);
   }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* Mobile bottom spacing for pages with tab bar */
+  .pb-tab-bar {
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px) + 1rem);
+  }
 }
