@@ -12,6 +12,7 @@ import CreateProject from "./pages/CreateProject";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Events from "./pages/Events";
+import Moodboards from "./pages/Moodboards";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
