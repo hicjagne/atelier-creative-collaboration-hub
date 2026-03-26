@@ -14,8 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['Playfair Display', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Instrument Serif', 'Georgia', 'serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['DM Mono', 'Courier New', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -69,6 +71,8 @@ export default {
           available: "hsl(var(--atelier-available))",
           limited: "hsl(var(--atelier-limited))",
           busy: "hsl(var(--atelier-busy))",
+          accent: "hsl(var(--atelier-accent))",
+          ink: "hsl(var(--atelier-ink))",
         },
       },
       borderRadius: {
@@ -86,24 +90,34 @@ export default {
           to: { height: "0" },
         },
         "fade-up": {
-          from: { opacity: "0", transform: "translateY(20px)", filter: "blur(4px)" },
-          to: { opacity: "1", transform: "translateY(0)", filter: "blur(0)" },
+          from: { opacity: "0", transform: "translateY(30px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
         "fade-in": {
-          from: { opacity: "0", filter: "blur(4px)" },
-          to: { opacity: "1", filter: "blur(0)" },
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
         "slide-in-left": {
           from: { opacity: "0", transform: "translateX(-20px)" },
           to: { opacity: "1", transform: "translateX(0)" },
         },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "50%": { transform: "translateY(-8px) rotate(1deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fade-up": "fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "fade-in": "fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "slide-in-left": "slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "marquee": "marquee 20s linear infinite",
+        "float": "float 6s ease-in-out infinite",
       },
     },
   },

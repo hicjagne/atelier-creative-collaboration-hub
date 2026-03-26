@@ -3,10 +3,11 @@ import projectCover2 from "@/assets/project-cover-2.jpg";
 import projectCover3 from "@/assets/project-cover-3.jpg";
 import eventCover from "@/assets/event-cover.jpg";
 
-export type UserRole = "Designer" | "Photographer" | "Stylist" | "Model" | "Makeup Artist";
+// Roles are now open-ended strings — presets provided for convenience
+export type UserRole = string;
 export type AvailabilityStatus = "available" | "limited" | "busy";
 export type ProjectStatus = "draft" | "seeking_collaborators" | "active" | "completed";
-export type ProjectType = "shoot" | "collection" | "lookbook" | "editorial";
+export type ProjectType = "shoot" | "collection" | "lookbook" | "editorial" | string;
 export type InviteStatus = "pending" | "accepted" | "declined";
 
 export interface User {
@@ -14,6 +15,7 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
+  custom_roles: string[]; // users can have multiple roles/skills
   bio: string;
   location: string;
   profile_image: string;
@@ -61,9 +63,36 @@ export interface FashionEvent {
   event_type: string;
   external_link: string;
   cover_image: string;
+  source?: "manual" | "instagram" | "tiktok";
 }
 
-export const ROLES: UserRole[] = ["Designer", "Photographer", "Stylist", "Model", "Makeup Artist"];
+export interface Moodboard {
+  id: string;
+  title: string;
+  description: string;
+  creator_id: string;
+  is_private: boolean;
+  shared_with: string[]; // user IDs
+  images: string[];
+  created_at: string;
+}
+
+// Preset roles — users can also type custom ones
+export const PRESET_ROLES: string[] = [
+  "Designer",
+  "Photographer",
+  "Stylist",
+  "Model",
+  "Makeup Artist",
+  "Creative Director",
+  "Set Designer",
+  "Illustrator",
+  "Textile Artist",
+  "Pattern Cutter",
+];
+
+// Keep backward compat
+export const ROLES = PRESET_ROLES;
 
 export const mockUsers: User[] = [
   {
@@ -71,6 +100,7 @@ export const mockUsers: User[] = [
     name: "Elena Vasquez",
     email: "elena@atelier.com",
     role: "Designer",
+    custom_roles: ["Designer", "Textile Artist"],
     bio: "London-based fashion designer exploring the intersection of sculptural form and wearable art. CSM graduate.",
     location: "Hackney, London",
     profile_image: "",
@@ -83,6 +113,7 @@ export const mockUsers: User[] = [
     name: "Marcus Chen",
     email: "marcus@atelier.com",
     role: "Photographer",
+    custom_roles: ["Photographer", "Creative Director"],
     bio: "Editorial and fashion photographer. Published in Dazed, i-D, and AnOther.",
     location: "Shoreditch, London",
     profile_image: "",
@@ -95,6 +126,7 @@ export const mockUsers: User[] = [
     name: "Amara Osei",
     email: "amara@atelier.com",
     role: "Stylist",
+    custom_roles: ["Stylist"],
     bio: "Fashion stylist working across editorial, commercial, and personal styling. Focused on emerging London designers.",
     location: "Peckham, London",
     profile_image: "",
@@ -107,6 +139,7 @@ export const mockUsers: User[] = [
     name: "Suki Tanaka",
     email: "suki@atelier.com",
     role: "Model",
+    custom_roles: ["Model"],
     bio: "Freelance model. Represented by Storm Management.",
     location: "Dalston, London",
     profile_image: "",
@@ -119,6 +152,7 @@ export const mockUsers: User[] = [
     name: "Priya Sharma",
     email: "priya@atelier.com",
     role: "Makeup Artist",
+    custom_roles: ["Makeup Artist", "Set Designer"],
     bio: "Makeup artist specialising in editorial and avant-garde beauty. MAC Pro Team.",
     location: "Brixton, London",
     profile_image: "",
@@ -184,6 +218,29 @@ export const mockProjects: Project[] = [
   },
 ];
 
+export const mockMoodboards: Moodboard[] = [
+  {
+    id: "1",
+    title: "SS26 Colour Research",
+    description: "Earthy tones, raw textures, undyed fabrics",
+    creator_id: "1",
+    is_private: true,
+    shared_with: [],
+    images: [projectCover1, projectCover2],
+    created_at: "2024-04-10",
+  },
+  {
+    id: "2",
+    title: "Nocturne References",
+    description: "Brutalist architecture meets draped fabric",
+    creator_id: "1",
+    is_private: false,
+    shared_with: ["2", "3"],
+    images: [projectCover3, projectCover1],
+    created_at: "2024-03-15",
+  },
+];
+
 export const mockEvents: FashionEvent[] = [
   {
     id: "1",
@@ -193,6 +250,7 @@ export const mockEvents: FashionEvent[] = [
     event_type: "Fashion Week",
     external_link: "https://londonfashionweek.co.uk",
     cover_image: eventCover,
+    source: "manual",
   },
   {
     id: "2",
@@ -202,6 +260,7 @@ export const mockEvents: FashionEvent[] = [
     event_type: "Graduate Show",
     external_link: "https://graduatefashionweek.com",
     cover_image: eventCover,
+    source: "instagram",
   },
   {
     id: "3",
@@ -211,6 +270,7 @@ export const mockEvents: FashionEvent[] = [
     event_type: "Open Studio",
     external_link: "#",
     cover_image: eventCover,
+    source: "manual",
   },
   {
     id: "4",
@@ -220,6 +280,7 @@ export const mockEvents: FashionEvent[] = [
     event_type: "Exhibition",
     external_link: "#",
     cover_image: eventCover,
+    source: "tiktok",
   },
 ];
 

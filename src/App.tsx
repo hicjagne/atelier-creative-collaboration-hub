@@ -12,6 +12,7 @@ import CreateProject from "./pages/CreateProject";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Events from "./pages/Events";
+import Moodboards from "./pages/Moodboards";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/moodboards" element={<Moodboards />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

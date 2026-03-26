@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
 import type { Project } from "@/lib/mock-data";
 import { mockUsers } from "@/lib/mock-data";
-import AvailabilityBadge from "./AvailabilityBadge";
 import { MapPin } from "lucide-react";
 
 const statusLabel: Record<string, string> = {
   draft: "Draft",
-  seeking_collaborators: "Seeking Collaborators",
+  seeking_collaborators: "Seeking Collabs",
   active: "Active",
   completed: "Completed",
+};
+
+const statusStyle: Record<string, string> = {
+  draft: "bg-muted text-muted-foreground",
+  seeking_collaborators: "bg-accent text-accent-foreground",
+  active: "bg-primary text-primary-foreground",
+  completed: "bg-primary/80 text-primary-foreground",
 };
 
 const ProjectCard = ({ project }: { project: Project }) => {
@@ -19,32 +25,32 @@ const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <Link
       to={`/projects/${project.id}`}
-      className="group block overflow-hidden transition-shadow duration-300 hover:shadow-lg"
+      className="group block overflow-hidden transition-all duration-300 hover:-translate-y-1"
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+      <div className="relative aspect-[4/5] overflow-hidden bg-muted border border-border">
         <img
           src={project.cover_image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
           loading="lazy"
         />
-        <div className="absolute top-4 left-4">
-          <span className="bg-background/90 backdrop-blur-sm text-foreground text-xs tracking-wider uppercase px-3 py-1.5">
+        <div className="absolute top-3 left-3">
+          <span className={`${statusStyle[project.status]} text-[10px] font-mono tracking-wider uppercase px-2.5 py-1`}>
             {statusLabel[project.status]}
           </span>
         </div>
       </div>
 
-      <div className="pt-4 pb-2">
-        <h3 className="font-serif text-xl tracking-tight">{project.title}</h3>
-        <p className="text-sm text-muted-foreground mt-1">
+      <div className="pt-3 pb-2">
+        <h3 className="font-display text-xl tracking-tight italic">{project.title}</h3>
+        <p className="text-xs font-mono text-muted-foreground mt-1">
           {creator?.name} · {project.project_type}
         </p>
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-2">
-          <MapPin className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5">
+          <MapPin className="w-3 h-3" />
           {project.location}
         </div>
-        <p className="text-xs text-muted-foreground mt-2">
+        <p className="text-[10px] font-mono text-accent mt-1.5">
           {acceptedCount}/{totalRoles} roles filled
         </p>
       </div>

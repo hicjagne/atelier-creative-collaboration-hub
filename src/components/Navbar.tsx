@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/projects", label: "Projects" },
+  { to: "/moodboards", label: "Boards" },
   { to: "/events", label: "Events" },
   { to: "/profile", label: "Profile" },
 ];
@@ -15,7 +16,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top bar — logo only on mobile, full nav on desktop */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
           <AtelierLogo />
@@ -37,7 +37,7 @@ const Navbar = () => {
             ))}
             <Link
               to="/projects/create"
-              className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-4 py-2 text-sm tracking-wide transition-transform duration-150 hover:opacity-90 active:scale-[0.97]"
+              className="inline-flex items-center gap-1.5 bg-accent text-accent-foreground px-4 py-2 text-sm tracking-wide transition-transform duration-150 hover:opacity-90 active:scale-[0.97]"
             >
               <Plus className="w-4 h-4" />
               Create
@@ -46,7 +46,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile bottom tab bar */}
       <div className="md:hidden">
         <MobileTabBar />
       </div>

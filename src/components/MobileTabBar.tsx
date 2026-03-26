@@ -1,21 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, FolderOpen, CalendarDays, User, Plus } from "lucide-react";
+import { Home, FolderOpen, CalendarDays, User, Plus, Palette } from "lucide-react";
 
-const tabs = [
-  { to: "/projects", label: "Projects", icon: FolderOpen },
-  { to: "/events", label: "Events", icon: CalendarDays },
-  { to: "/projects/create", label: "Create", icon: Plus, isAction: true },
-  { to: "/profile", label: "Profile", icon: User },
-  { to: "/", label: "Home", icon: Home },
-];
-
-// Reorder for visual layout: Home, Projects, Create (center), Events, Profile
 const orderedTabs = [
-  tabs[4], // Home
-  tabs[0], // Projects
-  tabs[2], // Create
-  tabs[1], // Events
-  tabs[3], // Profile
+  { to: "/", label: "Home", icon: Home },
+  { to: "/projects", label: "Projects", icon: FolderOpen },
+  { to: "/projects/create", label: "Create", icon: Plus, isAction: true },
+  { to: "/moodboards", label: "Boards", icon: Palette },
+  { to: "/profile", label: "Profile", icon: User },
 ];
 
 const MobileTabBar = () => {
@@ -33,7 +24,7 @@ const MobileTabBar = () => {
               <Link
                 key={tab.to}
                 to={tab.to}
-                className="flex items-center justify-center w-12 h-12 bg-primary text-primary-foreground rounded-full -mt-4 shadow-lg active:scale-[0.95] transition-transform"
+                className="flex items-center justify-center w-11 h-11 bg-accent text-accent-foreground -mt-4 shadow-lg active:scale-[0.95] transition-transform"
               >
                 <Icon className="w-5 h-5" />
               </Link>
@@ -44,12 +35,12 @@ const MobileTabBar = () => {
             <Link
               key={tab.to}
               to={tab.to}
-              className={`flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1 transition-colors active:scale-[0.95] ${
+              className={`flex flex-col items-center justify-center gap-0.5 min-w-[52px] py-1 transition-colors active:scale-[0.95] ${
                 isActive ? "text-foreground" : "text-muted-foreground"
               }`}
             >
               <Icon className="w-5 h-5" strokeWidth={isActive ? 2.2 : 1.5} />
-              <span className="text-[10px] tracking-wide">{tab.label}</span>
+              <span className="text-[10px] font-mono tracking-wide">{tab.label}</span>
             </Link>
           );
         })}
