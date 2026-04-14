@@ -4,13 +4,15 @@ import AvailabilityBadge from "@/components/AvailabilityBadge";
 import ProjectCard from "@/components/ProjectCard";
 import CollaborationGraph from "@/components/CollaborationGraph";
 import { currentUser, mockProjects } from "@/lib/mock-data";
-import { MapPin, Settings, Camera, Share2, QrCode } from "lucide-react";
+import { MapPin, Settings, Camera, Share2, QrCode, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useUser } from "@/lib/user-context";
 
 const Profile = () => {
   const user = currentUser;
   const [showQR, setShowQR] = useState(false);
+  const { isPro, accountType } = useUser();
   const userProjects = mockProjects.filter(
     (p) => p.collaborators.some((c) => c.user_id === user.id && c.invite_status === "accepted")
   );
