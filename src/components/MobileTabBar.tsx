@@ -2,7 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, FolderOpen, CalendarDays, User, Plus, Palette, Compass, Users, Heart, Sparkles } from "lucide-react";
 import { useUser } from "@/lib/user-context";
 
-const creativeTabs = [
+type TabItem = { to: string; label: string; icon: typeof Home; isAction?: boolean };
+
+const creativeTabs: TabItem[] = [
   { to: "/", label: "Home", icon: Home },
   { to: "/projects", label: "Projects", icon: FolderOpen },
   { to: "/projects/create", label: "Create", icon: Plus, isAction: true },
@@ -10,7 +12,7 @@ const creativeTabs = [
   { to: "/profile", label: "Profile", icon: User },
 ];
 
-const consumerTabs = [
+const consumerTabs: TabItem[] = [
   { to: "/discover", label: "Discover", icon: Compass },
   { to: "/creatives", label: "Creatives", icon: Users },
   { to: "/projects", label: "Projects", icon: FolderOpen },
