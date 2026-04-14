@@ -15,7 +15,8 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
-  custom_roles: string[]; // users can have multiple roles/skills
+  custom_roles: string[];
+  account_type: "creative" | "consumer";
   bio: string;
   location: string;
   profile_image: string;
@@ -101,6 +102,7 @@ export const mockUsers: User[] = [
     email: "elena@atelier.com",
     role: "Designer",
     custom_roles: ["Designer", "Textile Artist"],
+    account_type: "creative",
     bio: "London-based fashion designer exploring the intersection of sculptural form and wearable art. CSM graduate.",
     location: "Hackney, London",
     profile_image: "",
@@ -114,6 +116,7 @@ export const mockUsers: User[] = [
     email: "marcus@atelier.com",
     role: "Photographer",
     custom_roles: ["Photographer", "Creative Director"],
+    account_type: "creative",
     bio: "Editorial and fashion photographer. Published in Dazed, i-D, and AnOther.",
     location: "Shoreditch, London",
     profile_image: "",
@@ -127,6 +130,7 @@ export const mockUsers: User[] = [
     email: "amara@atelier.com",
     role: "Stylist",
     custom_roles: ["Stylist"],
+    account_type: "creative",
     bio: "Fashion stylist working across editorial, commercial, and personal styling. Focused on emerging London designers.",
     location: "Peckham, London",
     profile_image: "",
@@ -140,6 +144,7 @@ export const mockUsers: User[] = [
     email: "suki@atelier.com",
     role: "Model",
     custom_roles: ["Model"],
+    account_type: "creative",
     bio: "Freelance model. Represented by Storm Management.",
     location: "Dalston, London",
     profile_image: "",
@@ -153,6 +158,7 @@ export const mockUsers: User[] = [
     email: "priya@atelier.com",
     role: "Makeup Artist",
     custom_roles: ["Makeup Artist", "Set Designer"],
+    account_type: "creative",
     bio: "Makeup artist specialising in editorial and avant-garde beauty. MAC Pro Team.",
     location: "Brixton, London",
     profile_image: "",
