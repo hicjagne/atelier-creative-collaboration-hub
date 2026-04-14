@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, FolderOpen, CalendarDays, User, Plus, Palette } from "lucide-react";
+import { Home, FolderOpen, CalendarDays, User, Plus, Palette, Compass, Users, Heart, Sparkles } from "lucide-react";
+import { useUser } from "@/lib/user-context";
 
-const orderedTabs = [
+const creativeTabs = [
   { to: "/", label: "Home", icon: Home },
   { to: "/projects", label: "Projects", icon: FolderOpen },
   { to: "/projects/create", label: "Create", icon: Plus, isAction: true },
@@ -9,8 +10,18 @@ const orderedTabs = [
   { to: "/profile", label: "Profile", icon: User },
 ];
 
+const consumerTabs = [
+  { to: "/discover", label: "Discover", icon: Compass },
+  { to: "/creatives", label: "Creatives", icon: Users },
+  { to: "/projects", label: "Projects", icon: FolderOpen },
+  { to: "/events", label: "Events", icon: CalendarDays },
+  { to: "/saved", label: "Saved", icon: Heart },
+];
+
 const MobileTabBar = () => {
   const location = useLocation();
+  const { accountType } = useUser();
+  const orderedTabs = accountType === "consumer" ? consumerTabs : creativeTabs;
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border pb-safe">
