@@ -148,6 +148,27 @@ const Profile = () => {
               ))}
             </div>
           </div>
+          {/* Pro upgrade banner */}
+          {accountType === "creative" && !isPro && (
+            <div className="mt-16">
+              <ScrollReveal>
+                <div className="border border-accent/30 p-8 text-center">
+                  <Sparkles className="w-6 h-6 text-accent mx-auto mb-3" />
+                  <h3 className="font-display text-2xl italic mb-2">Upgrade to Atelier Pro</h3>
+                  <p className="text-xs text-muted-foreground max-w-md mx-auto mb-4">
+                    Get featured in discovery, unlock analytics, and elevate your portfolio.
+                  </p>
+                  <Link
+                    to="/pro"
+                    className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-2.5 text-xs font-mono tracking-wider uppercase transition-transform active:scale-[0.97]"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Learn more
+                  </Link>
+                </div>
+              </ScrollReveal>
+            </div>
+          )}
         </div>
       </main>
     </div>
