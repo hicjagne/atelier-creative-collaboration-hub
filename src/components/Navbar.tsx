@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import AtelierLogo from "./AtelierLogo";
 import MobileTabBar from "./MobileTabBar";
-import { Plus } from "lucide-react";
+import { Plus, Sparkles } from "lucide-react";
+import { useUser } from "@/lib/user-context";
 
-const navLinks = [
+const creativeLinks = [
   { to: "/", label: "Home" },
   { to: "/projects", label: "Projects" },
   { to: "/moodboards", label: "Boards" },
@@ -11,8 +12,18 @@ const navLinks = [
   { to: "/profile", label: "Profile" },
 ];
 
+const consumerLinks = [
+  { to: "/discover", label: "Discover" },
+  { to: "/creatives", label: "Creatives" },
+  { to: "/projects", label: "Projects" },
+  { to: "/events", label: "Events" },
+  { to: "/saved", label: "Saved" },
+];
+
 const Navbar = () => {
   const location = useLocation();
+  const { accountType, isPro } = useUser();
+  const navLinks = accountType === "consumer" ? consumerLinks : creativeLinks;
 
   return (
     <>
@@ -35,13 +46,24 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/projects/create"
-              className="inline-flex items-center gap-1.5 bg-accent text-accent-foreground px-4 py-2 text-sm tracking-wide transition-transform duration-150 hover:opacity-90 active:scale-[0.97]"
-            >
-              <Plus className="w-4 h-4" />
-              Create
-            </Link>
+            {accountType === "creative" && (
+              <Link
+                to="/projects/create"
+                className="inline-flex items-center gap-1.5 bg-accent text-accent-foreground px-4 py-2 text-sm tracking-wide transition-transform duration-150 hover:opacity-90 active:scale-[0.97]"
+              >
+                <Plus className="w-4 h-4" />
+                Create
+              </Link>
+            )}
+            {!isPro && accountType === "creative" && (
+              <Link
+                to="/pro"
+                className="inline-flex items-center gap-1.5 text-xs font-mono tracking-wider text-accent hover:text-foreground transition-colors"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                Pro
+              </Link>
+            )}
           </div>
         </div>
       </nav>
