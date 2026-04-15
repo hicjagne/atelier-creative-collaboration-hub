@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import AtelierLogo from "@/components/AtelierLogo";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { useUser, type AccountType } from "@/lib/user-context";
 import heroImage from "@/assets/hero-editorial.jpg";
+import { Palette, Eye } from "lucide-react";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -9,13 +13,20 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [accountType, setAccountType] = useState<AccountType>("creative");
   const navigate = useNavigate();
+  const { setAccountType: setGlobalAccountType } = useUser();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Mock auth — navigate to onboarding for signup, projects for login
     if (isSignUp) {
-      navigate("/onboarding");
+      setGlobalAccountType(accountType);
+      if (accountType === "consumer") {
+        navigate("/discover");
+      } else {
+        navigate("/onboarding");
+      }
     } else {
       navigate("/projects");
     }
@@ -42,17 +53,54 @@ const Auth = () => {
 
         <form onSubmit={handleSubmit} className="space-y-5 max-w-sm">
           {isSignUp && (
-            <div>
-              <label className="text-xs tracking-wider uppercase text-muted-foreground block mb-2">Full name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full border border-border bg-transparent px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring transition-shadow"
-                placeholder="Elena Vasquez"
-                required
-              />
-            </div>
+            <>
+              <div>
+                <label className="text-xs tracking-wider uppercase text-muted-foreground block mb-2">Full name</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full border border-border bg-transparent px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring transition-shadow"
+                  placeholder="Elena Vasquez"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="text-xs tracking-wider uppercase text-muted-foreground block mb-4">Account Type</label>
+                <RadioGroup value={accountType} onValueChange={(v) => setAccountType(v as AccountType)} className="gap-3">
+                  <div className="border border-border p-4 hover:border-accent transition-colors cursor-pointer">
+                    <div className="flex items-start gap-3">
+                      <RadioGroupItem value="creative" id="creative" className="mt-1" />
+                      <Label htmlFor="creative" className="cursor-pointer flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Palette className="w-4 h-4 text-accent" />
+                          <span className="font-mono text-xs tracking-wide">Create & collaborate</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          For designers, photographers, stylists. Create projects, build portfolio, find collaborators.
+                        </p>
+                      </Label>
+                    </div>
+                  </div>
+
+                  <div className="border border-border p-4 hover:border-accent transition-colors cursor-pointer">
+                    <div className="flex items-start gap-3">
+                      <RadioGroupItem value="consumer" id="consumer" className="mt-1" />
+                      <Label htmlFor="consumer" className="cursor-pointer flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Eye className="w-4 h-4 text-accent" />
+                          <span className="font-mono text-xs tracking-wide">Discover creatives & events</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          Explore London's emerging fashion scene. Browse portfolios, discover talent, find events.
+                        </p>
+                      </Label>
+                    </div>
+                  </div>
+                </RadioGroup>
+              </div>
+            </>
           )}
           <div>
             <label className="text-xs tracking-wider uppercase text-muted-foreground block mb-2">Email</label>
