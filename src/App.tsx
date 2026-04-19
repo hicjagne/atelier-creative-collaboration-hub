@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { UserProvider } from "@/lib/user-context";
+import { ProjectsProvider } from "@/lib/projects-context";
+import Invite from "./pages/Invite";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Onboarding from "./pages/Onboarding";
@@ -26,10 +28,12 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <UserProvider>
+        <ProjectsProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
           <Routes>
+            <Route path="/invite/:token" element={<Invite />} />
             <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/onboarding" element={<Onboarding />} />
@@ -48,6 +52,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        </ProjectsProvider>
       </UserProvider>
     </TooltipProvider>
   </QueryClientProvider>
