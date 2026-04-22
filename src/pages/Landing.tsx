@@ -13,8 +13,8 @@ const Landing = () => {
   return (
     <div className="min-h-screen">
       {/* Minimal landing nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between text-primary-foreground">
+      <nav className="fixed top-0 left-0 right-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between text-foreground">
           <AtelierLogo />
           <div className="flex items-center gap-6">
             <Link to="/auth" className="text-sm tracking-wide opacity-70 hover:opacity-100 transition-opacity">
