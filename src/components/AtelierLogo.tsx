@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
+import logo from "@/assets/atelier-logo.jpg";
 
 const AtelierLogo = ({ className = "" }: { className?: string }) => (
-  <Link to="/" className={`inline-block ${className}`}>
-    <span className="font-display text-2xl md:text-3xl tracking-tight italic">
-      atelier
-      <span className="inline-block w-1.5 h-1.5 bg-accent rounded-full ml-0.5 -translate-y-3" />
-    </span>
+  <Link to="/" className={`inline-block ${className}`} aria-label="Atelier home">
+    <img
+      src={logo}
+      alt="Atelier"
+      className="h-10 md:h-12 w-auto object-contain mix-blend-multiply"
+    />
   </Link>
 );
 
